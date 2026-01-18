@@ -1,0 +1,13 @@
+{
+  "itemGroup.creategoingpostal": "Create: Going Postal",
+  "block.creategoingpostal.postmastersdesk": "Postmaster's Desk",
+  "item.creategoingpostal.postalparcel": "Postal Parcel",
+
+  "creategoingpostal.configuration.title": "Create: Going Postal Configs",
+  "creategoingpostal.configuration.section.creategoingpostal.common.toml": "Create: Going Postal Configs",
+  "creategoingpostal.configuration.section.creategoingpostal.common.toml.title": "Create: Going Postal Configs",
+  "creategoingpostal.configuration.items": "Item List",
+  "creategoingpostal.configuration.logDirtBlock": "Log Dirt Block",
+  "creategoingpostal.configuration.magicNumberIntroduction": "Magic Number Text",
+  "creategoingpostal.configuration.magicNumber": "Magic Number"
+}
