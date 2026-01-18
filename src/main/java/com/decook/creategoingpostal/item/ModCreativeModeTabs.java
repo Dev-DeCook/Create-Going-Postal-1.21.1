@@ -4,7 +4,6 @@ import com.decook.creategoingpostal.CreateGoingPostal;
 import com.decook.creategoingpostal.block.ModBlocks;
 
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 
+@SuppressWarnings("null")
 public class ModCreativeModeTabs {
 
     // Create a Deferred Register to hold CreativeModeTabs
