@@ -3,13 +3,10 @@ package com.decook.creategoingpostal;
 import org.slf4j.Logger;
 
 import com.decook.creategoingpostal.block.ModBlocks;
+import com.decook.creategoingpostal.item.ModCreativeModeTabs;
 import com.decook.creategoingpostal.item.ModItems;
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -17,10 +14,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CreateGoingPostal.MOD_ID)
@@ -30,26 +24,14 @@ public class CreateGoingPostal {
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    // Create a Deferred Register to hold CreativeModeTabs then create a tab with the id "creategoingpostal:creategoingpostal_tab" for all items
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATEGOINGPOSTAL_TAB = CREATIVE_MODE_TABS.register("creategoingpostal_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.creategoingpostal"))
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModItems.POSTALPARCEL.get().getDefaultInstance())
-            .build());
-
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public CreateGoingPostal(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
-
-        // Register the Deferred Register to the mod event bus so the tabs, blocks and items get registered
-        CREATIVE_MODE_TABS.register(modEventBus);
+        // Register the Deferred Registers to the mod event bus so the tabs, blocks and items get registered
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
-
-        // Register addCreative
-        modEventBus.addListener(this::addCreative);
+        ModCreativeModeTabs.register(modEventBus);
+        // Register the commonSetup method for modloading
+        modEventBus.addListener(this::commonSetup);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (CreateGoingPostal) to respond directly to events.
@@ -65,12 +47,5 @@ public class CreateGoingPostal {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-    }
-
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CREATEGOINGPOSTAL_TAB.getKey()) {
-            event.accept(ModItems.POSTALPARCEL);
-            event.accept(ModBlocks.POSTMASTERSDESK_BLOCK);
-        }
     }
 }
