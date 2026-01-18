@@ -30,31 +30,25 @@ public class CreateGoingPostal {
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "creategoingpostal" namespace
+    // Create a Deferred Register to hold CreativeModeTabs then create a tab with the id "creategoingpostal:creategoingpostal_tab" for all items
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
-
-    // Creates a creative tab with the id "creategoingpostal:creategoingpostal_tab" for all items and place it after the combat tab.
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATEGOINGPOSTAL_TAB = CREATIVE_MODE_TABS.register("creategoingpostal_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.creategoingpostal")) //The language key for the title of your CreativeModeTab
+            .title(Component.translatable("itemGroup.creategoingpostal"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.POSTALPARCEL.get().getDefaultInstance())
-            // Add the mod items to its own tabs
-            .displayItems((parameters, output) -> {
-                output.accept(ModItems.POSTALPARCEL.get());
-                output.accept(ModBlocks.POSTMASTERSDESK_BLOCK.get());
-            }).build());
+            .build());
 
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public CreateGoingPostal(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Deferred Register to the mod event bus so the tab get registered
+        // Register the Deferred Register to the mod event bus so the tabs, blocks and items get registered
         CREATIVE_MODE_TABS.register(modEventBus);
-
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
 
+        // Register addCreative
         modEventBus.addListener(this::addCreative);
 
         // Register ourselves for server and other game events we are interested in.
@@ -74,7 +68,7 @@ public class CreateGoingPostal {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+        if (event.getTabKey() == CREATEGOINGPOSTAL_TAB.getKey()) {
             event.accept(ModItems.POSTALPARCEL);
             event.accept(ModBlocks.POSTMASTERSDESK_BLOCK);
         }
