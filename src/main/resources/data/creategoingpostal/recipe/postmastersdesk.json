@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "III"
+  ],
+  "key": {
+    "#": {
+      "item":"minecraft:iron_nugget"
+    },
+    "I": {
+      "item":"minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "id":"creategoingpostal:postmastersdesk",
+    "count":  1
+  }
+}
