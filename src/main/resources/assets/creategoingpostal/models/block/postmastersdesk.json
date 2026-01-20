@@ -2,7 +2,8 @@
     "parent": "minecraft:block/block",
     "textures": {
         "side": "creategoingpostal:block/postmastersdesk",
-        "front": "creategoingpostal:block/postmastersdesk_front"
+        "front": "creategoingpostal:block/postmastersdesk_front",
+        "particle": "creategoingpostal:block/postmastersdesk"
     },
   "elements": [
     {
