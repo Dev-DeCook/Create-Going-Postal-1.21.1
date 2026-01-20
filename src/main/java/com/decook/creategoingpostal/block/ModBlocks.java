@@ -1,6 +1,7 @@
 package com.decook.creategoingpostal.block;
 
 import com.decook.creategoingpostal.CreateGoingPostal;
+import com.decook.creategoingpostal.block.custom.PostmastersDeskBlock;
 import com.decook.creategoingpostal.item.ModItems;
 
 import net.minecraft.world.item.BlockItem;
@@ -19,7 +20,7 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CreateGoingPostal.MOD_ID);
 
     public static final DeferredBlock<Block> POSTMASTERSDESK_BLOCK = registerBlock("postmastersdesk",
-         () -> new Block(BlockBehaviour.Properties.of()
+         () -> new PostmastersDeskBlock(BlockBehaviour.Properties.of()
                 .strength(0.5f)
                 .mapColor(MapColor.COLOR_PURPLE)
                 .sound(SoundType.WOOD)));
