@@ -20,7 +20,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> POSTMASTERSDESK_BLOCK = registerBlock("postmastersdesk",
          () -> new Block(BlockBehaviour.Properties.of()
-                .strength(1f)
+                .strength(0.5f)
                 .mapColor(MapColor.COLOR_PURPLE)
                 .sound(SoundType.WOOD)));
 
