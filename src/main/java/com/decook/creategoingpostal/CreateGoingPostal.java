@@ -3,34 +3,40 @@ package com.decook.creategoingpostal;
 import org.slf4j.Logger;
 
 import com.decook.creategoingpostal.block.ModBlocks;
+import com.decook.creategoingpostal.block.entity.ModBlockEntities;
 import com.decook.creategoingpostal.item.ModCreativeModeTabs;
 import com.decook.creategoingpostal.item.ModItems;
+import com.decook.creategoingpostal.screen.ModMenuTypes;
+import com.decook.creategoingpostal.screen.custom.PostmastersDeskPostScreen;
 import com.mojang.logging.LogUtils;
 
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CreateGoingPostal.MOD_ID)
 public class CreateGoingPostal {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "creategoingpostal";
-    // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public CreateGoingPostal(IEventBus modEventBus, ModContainer modContainer) {
         // Register the Deferred Registers to the mod event bus so the tabs, blocks and items get registered
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModItems.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
-        // Register the commonSetup method for modloading
+        
         modEventBus.addListener(this::commonSetup);
 
         // Register ourselves for server and other game events we are interested in.
@@ -47,5 +53,14 @@ public class CreateGoingPostal {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+    }
+
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.POSTMASTERSDESK_MENU.get(), PostmastersDeskPostScreen::new);
+        }
+        
     }
 }
