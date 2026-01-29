@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -30,4 +31,21 @@ public class PostmastersDeskPostScreen extends AbstractContainerScreen<Postmaste
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
     }
 
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        MutableComponent text = null;
+        // tab text
+        text = Component.translatable("creategoingpostal.postmastersDeskPostScreen.tab1");
+        guiGraphics.drawString(this.font, text, 29 - (this.font.width(text) / 2), 5, 4210752, false);
+        text = Component.translatable("creategoingpostal.postmastersDeskPostScreen.tab2");
+        guiGraphics.drawString(this.font, text, 88 - (this.font.width(text) / 2), 5, 4210752, false);
+        text = Component.translatable("creategoingpostal.postmastersDeskPostScreen.tab3");
+        guiGraphics.drawString(this.font, text, 147 - (this.font.width(text) / 2), 5, 4210752, false);
+    }
 }

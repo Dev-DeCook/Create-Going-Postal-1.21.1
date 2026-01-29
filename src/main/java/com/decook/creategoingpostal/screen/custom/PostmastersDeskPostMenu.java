@@ -28,14 +28,9 @@ public class PostmastersDeskPostMenu extends AbstractContainerMenu {
         super(ModMenuTypes.POSTMASTERSDESK_MENU.get(), containerId);
         this.blockEntity = ((PostmastersDeskBlockEntity) blockEntity);
         this.level = inv.player.level();
-
-        
-
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        
         addPostInventory(this.blockEntity.post);
-        
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
