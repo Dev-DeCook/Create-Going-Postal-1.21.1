@@ -2,7 +2,7 @@ package com.decook.creategoingpostal.block.entity;
 
 import javax.annotation.Nullable;
 
-import com.decook.creategoingpostal.screen.custom.PostmastersDeskPostMenu;
+import com.decook.creategoingpostal.screen.custom.PostmastersDeskMenu;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -70,18 +70,20 @@ public class PostmastersDeskBlockEntity extends BlockEntity implements MenuProvi
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.put("post", post.serializeNBT(registries));
+        tag.put("profit", profit.serializeNBT(registries));
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         post.deserializeNBT(registries, tag.getCompound("post"));
+        profit.deserializeNBT(registries, tag.getCompound("profit"));
     }
 
     @Override
     @Nullable
     public AbstractContainerMenu createMenu(int containerId, Inventory inv, Player player) {
-        return new PostmastersDeskPostMenu(1, inv, this);
+        return new PostmastersDeskMenu(containerId, inv, this);
     }
 
     @Override

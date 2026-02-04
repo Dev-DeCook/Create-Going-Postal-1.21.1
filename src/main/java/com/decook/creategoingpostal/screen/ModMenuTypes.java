@@ -1,7 +1,7 @@
 package com.decook.creategoingpostal.screen;
 
 import com.decook.creategoingpostal.CreateGoingPostal;
-import com.decook.creategoingpostal.screen.custom.PostmastersDeskPostMenu;
+import com.decook.creategoingpostal.screen.custom.PostmastersDeskMenu;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -16,8 +16,8 @@ public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
         DeferredRegister.create(Registries.MENU, CreateGoingPostal.MOD_ID);
 
-    public static final DeferredHolder<MenuType<?>, MenuType<PostmastersDeskPostMenu>> POSTMASTERSDESK_MENU =
-        registerMenuType("postmastersdeskpost_menu", PostmastersDeskPostMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<PostmastersDeskMenu>> POSTMASTERSDESK_MENU =
+        registerMenuType("postmastersdesk_menu", PostmastersDeskMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
